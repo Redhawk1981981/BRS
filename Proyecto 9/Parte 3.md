@@ -1,42 +1,24 @@
 ﻿**Parte 3 – Análisis de nuestro certificado y de certificados erróneos (vía realista)**
 
-[1. Introducción	2](#__refheading___toc106_2306903008)
+[1. Introducción](#__refheading___toc106_2306903008)
 
-[2. Análisis de nuestro certificado	2](#__refheading___toc108_2306903008)
+[2. Análisis de nuestro certificado](#__refheading___toc108_2306903008)
 
-[3. Análisis de certificados erróneos	8](#__refheading___toc307_2306903008)
+[3. Análisis de certificados erróneos](#__refheading___toc307_2306903008)
 
-[3.1 Certificado expirado	9](#__refheading___toc309_2306903008)
+[3.1 Certificado expirado](#__refheading___toc309_2306903008)
 
-[3.2 Certificado revocado	12](#__refheading___toc311_2306903008)
+[3.2 Certificado revocado](#__refheading___toc311_2306903008)
 
-[3.3 Certificado auto-firmado	14](#__refheading___toc313_2306903008)
+[3.3 Certificado auto-firmado](#__refheading___toc313_2306903008)
 
-[3.4 Certificado con nombre de dominio desconocido	16](#__refheading___toc315_2306903008)
+[3.4 Certificado con nombre de dominio desconocido](#__refheading___toc315_2306903008)
 
-[3.5 Certificado con entidad certificadora no confiable	18](#__refheading___toc321_2306903008)
+[3.5 Certificado con entidad certificadora no confiable](#__refheading___toc321_2306903008)
 
-[4. Conclusión	19](#__refheading___toc323_2306903008)
+[4. Conclusión](#__refheading___toc323_2306903008)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1. # <a name="__refheading___toc106_2306903008"></a>**1. Introducción**
+# <a name="__refheading___toc106_2306903008"></a>**1. Introducción**
    Para realizar esta tercera parte del proyecto, se nos propone lo siguiente:
 
    Analiza el certificado válido de tu sitio web de la parte 2 en un servicio como SSL Labs y explica, en base a los resultados, los motivos que llevan a verificarlo como válido.
@@ -44,12 +26,13 @@
    Luego, localiza tres certificados erróneos de diferente tipo en sitios web. Analízalos también usando un servicio y explica los motivos que llevan a verificarlos como no válidos.
 
    Los certificados erróneos que hemos utilizado se han obtenido de la web [www.badssl.com](http://www.badssl.com/), la cual nos proporciona varias webs con certificados erróneos creados expresamente para poder realizar pruebas y comprobaciones.
-1. # <a name="__refheading___toc108_2306903008"></a>**2. Análisis de nuestro certificado**
+
+# <a name="__refheading___toc108_2306903008"></a>**2. Análisis de nuestro certificado**
    Comenzamos analizando nuestro certificado, haciendo uso del servicio sugerido ([SSL Labs](https://www.ssllabs.com/ssltest/)), para poder indicar los motivos principales por los que se considera un certificado válido.
 
    En el sumario general, vemos como la calificación del certificado es bastante alta, indicándonos que no presenta ningún problema y remarcando que soporta el protocolo de seguridad en la capa de transporte TLS 1.3, el cual es el más avanzado actualmente.
 
-   ![](IMG/012.png)
+![](IMG/012.png)
 
    En los detalles del propio certificado vemos otros aspectos muy importantes que hacen que nuestro certificado sea considerado como válido, como son:
 
@@ -76,10 +59,11 @@ En los resultados de las pruebas de handshake con los diferentes navegadores y s
 Y por ultimo, podemos ver como cumple con los protocolos de seguridad más usados.
 
 ![](IMG/018.png)
-1. # <a name="__refheading___toc307_2306903008"></a>**3. Análisis de certificados erróneos**
+
+# <a name="__refheading___toc307_2306903008"></a>**3. Análisis de certificados erróneos**
    Vamos a realizar un análisis de diversos certificados erróneos y ver que motivo es el que ha dado lugar a que sean considerados como tal. Para realizar este análisis se ha usado también el servicio sugerido ([SSL Labs](https://www.ssllabs.com/ssltest/)).
 
-   1. ## <a name="__refheading___toc309_2306903008"></a>**3.1 Certificado expirado**
+## <a name="__refheading___toc309_2306903008"></a>**3.1 Certificado expirado**
       Al acceder a la web, encontramos el error NET::ERR\_CERT\_DATE\_INVALID.
 
       ![](IMG/019.png)
@@ -97,7 +81,8 @@ Y por ultimo, podemos ver como cumple con los protocolos de seguridad más usado
       ![](IMG/023.png)
 
       Aunque este certificado cuenta con otros motivos para no ser válido, como que la los nombres alternativos no concuerdan, entre otros, el principal motivo para considerar este certificado como no valido es que está obsoleto. 
-   1. ## <a name="__refheading___toc311_2306903008"></a>**3.2 Certificado revocado**
+
+## <a name="__refheading___toc311_2306903008"></a>**3.2 Certificado revocado**
       En este caso, al acceder a la web recibimos NET::ERR\_CERT\_REVOKED
 
 
@@ -108,7 +93,8 @@ Y por ultimo, podemos ver como cumple con los protocolos de seguridad más usado
       Podemos ver en la siguiente captura, el resultado que nos ha arrojado el servicio utilizado, donde aparece la el estado de revocación del certificado.
 
       ![](IMG/025.png)
-   1. ## <a name="__refheading___toc313_2306903008"></a>**3.3 Certificado auto-firmado**
+
+## <a name="__refheading___toc313_2306903008"></a>**3.3 Certificado auto-firmado**
       En este caso, tenemos un certificado auto-firmado, es decir, que no ha sido expedido por ninguna entidad certificadora de confianza, por lo que el certificado no puede considerarse como seguro.
 
       En las siguientes capturas, podemos ver como en el análisis realizado por el servicio utilizado, nos indica que la entidad certificadora no está verificada, incluso, en la ultima captura, podremos ver como nos indica que la cadena de certificación está incompleta, esto se debe a eso mismo, que no existe una entidad certificadora en el comienzo de la misma.
@@ -117,20 +103,10 @@ Y por ultimo, podemos ver como cumple con los protocolos de seguridad más usado
 
       ![](IMG/027.png)
 
-
-
-
-
-
-
-
       ![](IMG/028.png)
-   1. ## <a name="__refheading___toc315_2306903008"></a>**3.4 Certificado con nombre de dominio desconocido**
+
+## <a name="__refheading___toc315_2306903008"></a>**3.4 Certificado con nombre de dominio desconocido**
       Al acceder a la web, en este caso, recibimos NET::ERR\_CERT\_COMMON\_NAME\_INVALID, esto se debe a que el nombre del dominio al que estamos intentado acceder no se encuentra en el listado SSL del propio sitio web, es decir, que o bien, hay un error en la configuración del sitio web, o, el certificado no corresponde al dominio.
-
-
-
-
 
       ![](IMG/029.png)
 
@@ -138,7 +114,7 @@ Y por ultimo, podemos ver como cumple con los protocolos de seguridad más usado
 
       ![](IMG/030.png)
 
-   1. ## <a name="__refheading___toc321_2306903008"></a>**3.5 Certificado con entidad certificadora no confiable**
+## <a name="__refheading___toc321_2306903008"></a>**3.5 Certificado con entidad certificadora no confiable**
       En este caso, al acceder a la web, obtenemos NET::ERR\_CERT\_AUTHORITY\_INVALID.
 
       ![](IMG/031.png)
@@ -150,7 +126,8 @@ Y por ultimo, podemos ver como cumple con los protocolos de seguridad más usado
       ![](IMG/032.png)
 
       ![](IMG/033.png)
-1. # <a name="__refheading___toc323_2306903008"></a>**4. Conclusión**
+
+# <a name="__refheading___toc323_2306903008"></a>**4. Conclusión**
    Tras haber analizado nuestro propio certificado, como los certificados erróneos expuestos en este documento con el servicio  [SSL Labs](https://www.ssllabs.com/ssltest/), podemos afirmar que los motivos principales que pueden hacer que un certificado sea válido o no, son los siguientes:
 
 - Se utiliza antes de su fecha de activación.
