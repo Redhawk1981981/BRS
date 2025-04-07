@@ -1,7 +1,5 @@
 ﻿**Parte 2 – Comparativa con otro certificado válido (vía realista)**
 
-**Índice**
-
 [1. Introducción](#__refheading___toc107_1526397747)
 
 [2. Comparativa básica](#__refheading___toc109_1526397747)
